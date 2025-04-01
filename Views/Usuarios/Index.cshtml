@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SibilaApp.Models.Usuarios>
+@{
+    ViewData["Title"] = "Usuarios";
+}
+<div class="container-fluid">
+    <h2 class="mb-4">Lista de usuarios</h2>
+
+    <p>
+        <a asp-action="Create" class="btn btn-success btn-sm">Crear Nuevo usuario</a>
+    </p>
+
+    <table class="table table-bordered table-striped table-hover" id="tablaUsuarios">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.Apellido)</th>
+                <th>@Html.DisplayNameFor(model => model.Rol)</th>
+                <th>@Html.DisplayNameFor(model => model.TipoDocumento)</th>
+                <th>@Html.DisplayNameFor(model => model.Documento)</th>
+                <th>@Html.DisplayNameFor(model => model.CorreoElectronico)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider" id="tablaUsuarios" width="100%" cellspacing="0">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
+                    <td>@Html.DisplayFor(modelItem => item.RolId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TipoDocumento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Documento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CorreoElectronico)</td>
+                    <td>
+                        <a class="btn btn-success btn-sm" asp-action="Edit" asp-route-id="@item.Id">Actualizar</a>
+                        <a class="btn btn-success btn-sm" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            //Llamar a datatable
+            $('#tablaUsuarios').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+
+
+

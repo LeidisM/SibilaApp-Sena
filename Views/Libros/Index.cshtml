@@ -1,0 +1,79 @@
+﻿@model IEnumerable<SibilaApp.Models.Libros>
+@{
+    ViewData["Title"] = "Libros";
+}
+<div class="container-fluid">
+    <h2 class="mb-4">Lista de Libros</h2>
+
+    <p>
+        <a asp-action="Create" class="btn btn-success btn-sm">Crear Nuevo libro</a>
+    </p>
+
+    <table class="table table-bordered table-striped table-hover" id="tablaLibros">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Titulo)</th>
+                <th>@Html.DisplayNameFor(model => model.Autor)</th>
+                <th>@Html.DisplayNameFor(model => model.Editorial)</th>
+                <th>@Html.DisplayNameFor(model => model.ISBN)</th>
+                <th>@Html.DisplayNameFor(model => model.Subcategoria)</th>
+                <th>@Html.DisplayNameFor(model => model.TipoMaterial)</th>
+                <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider" id="tablaUsuarios" width="100%" cellspacing="0">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Autor)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Editorial)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ISBN)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Subcategoria)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TipoMaterial)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td>
+                        <a class="btn btn-success btn-sm" asp-action="Edit" asp-route-id="@item.Id">Actualizar</a>
+                        <a class="btn btn-success btn-sm" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            //Llamar a datatable
+            $('#tablaLibros').DataTable({
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+
+
+

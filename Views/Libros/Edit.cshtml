@@ -1,0 +1,79 @@
+﻿@using SibilaApp.Models.ViewModels
+@model LibroViewModel
+
+
+<div class="row">
+
+
+    <div class="col-12 ps-5 d-flex justify-content-center mb-3">
+        <h2 class="mt-0" id="texto">Editar Libros</h2>
+    </div>
+
+    <div class="col-12 ps-5">
+        <!-- Formulario de contacto -->
+        <form class="w-75 mx-auto" asp-action="Edit" enctype="multipart/form-data">
+            <div class="row">
+                <!-- Primera columna -->
+                <div class="col-md-6">
+                    <input asp-for="Libro.Id" type="hidden">
+
+                    <div class="mb-3">
+                        <label asp-for="Libro.Titulo" class="form-label"></label>
+                        <input asp-for="Libro.Titulo" class="form-control" id="titulo" required>
+                        <span asp-validation-for="Libro.Titulo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Libro.Autor" class="form-label"></label>
+                        <input asp-for="Libro.Autor" class="form-control" id="autor" required>
+                        <span asp-validation-for="Libro.Autor" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Libro.Editorial" class="form-label"></label>
+                        <input asp-for="Libro.Editorial" class="form-control" id="editorial" required>
+                        <span asp-validation-for="Libro.Editorial" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Segunda columna -->
+                <div class="col-md-6">
+
+                    <div class="mb-3">
+                        <label asp-for="Libro.Estado" class="form-label"></label>
+                        <select asp-for="Libro.Estado" asp-items="Model.EstadolibrosEnum" class="form-control">
+                            <option value="">Seleccione estado</option> <!-- Opción vacía -->
+                        </select>
+                        <span asp-validation-for="Libro.Estado" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Libro.ISBN" class="form-label"></label>
+                        <input asp-for="Libro.ISBN" class="form-control" id="ISBN" required>
+                        <span asp-validation-for="Libro.ISBN" class="text-danger"></span>
+                    </div>
+                    @* <div class="mb-3">
+                    <label asp-for="Usuario.Contrasena" class="form-label"></label>
+                    <input asp-for="Usuario.Contrasena" class="form-control" id="contrasena" required>
+                    <span asp-validation-for="Usuario.Contrasena" class="text-danger"></span>
+                    </div> *@
+                    <div class="mb-3">
+                        <label asp-for="Libro.Subcategoria" class="form-label"></label>
+                        <input asp-for="Libro.Subcategoria" class="form-control" id="subcategoria" required>
+                        <span asp-validation-for="Libro.Subcategoria" class="text-danger"></span>
+                    </div> 
+                    <div class="mb-3">
+                        <label asp-for="Libro.TipoMaterial" class="form-label"></label>
+                        <input asp-for="Libro.TipoMaterial" class="form-control" id="tipomaterial" required>
+                        <span asp-validation-for="Libro.TipoMaterial" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de envío -->
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-success btn-s" type="submit">Editar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿@using SibilaApp.Models.ViewModels
+@model Libros
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@* <h3>Estas seguro de eliminar este libro</h3> *@
+<div>
+    <h2 class="mt-0" id="texto">¿Seguro que desea eliminar el libro: @Model.Titulo?</h2><hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Titulo)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Autor)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Editorial)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.TipoMaterial)</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Titulo" />
+        <input type="hidden" asp-for="Autor" />
+
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+    </form>
+</div>

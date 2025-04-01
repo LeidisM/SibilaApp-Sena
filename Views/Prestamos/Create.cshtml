@@ -1,0 +1,42 @@
+﻿@using SibilaApp.Models.ViewModels
+@model PrestamoViewModel
+
+<div class="row">
+    <div class="col-12 ps-5 d-flex justify-content-center mb-3">
+        <h2 class="mt-0" id="texto">Crear Prestamo</h2>
+    </div>
+    <div class="col-12 ps-5">
+        <!-- Formulario de contacto -->
+        <form class="w-75 mx-auto" asp-action="Create" enctype="multipart/form-data">
+
+            <div class="row">
+                <!-- Primera columna -->
+                <div class="col-md-6">
+
+                    <div class="mb-3">
+                        <label asp-for="ISBN" class="form-label"></label>
+                        <input asp-for="ISBN" class="form-control" id="isbn" required>
+                        <span asp-validation-for="ISBN" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Documento" class="form-label"></label>
+                        <input asp-for="Documento" class="form-control" id="documento" required>
+                        <span asp-validation-for="Documento" class="text-danger"></span>
+                    </div>                  
+                    
+                </div>
+            </div>
+
+            <!-- Botón de envío -->
+
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-success btn-s" type="submit">Crear</button>
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
+

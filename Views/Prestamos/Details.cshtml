@@ -1,0 +1,29 @@
+﻿@model SibilaApp.Models.Prestamos
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h2 class="mt-0" id="texto">Prestamo: @Model.Id - Nombre: @Model.Usuario.Nombre - </h2>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.FechaPrestamo)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.FechaPrestamo)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Libro.Titulo)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Libro.Titulo)</dd>       
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Libro.Autor)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Libro.Autor)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Usuario.Nombre)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Usuario.Nombre)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Usuario.Apellido)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Usuario.Apellido)</dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Usuario.Documento)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Usuario.Documento)</dd>
+
+     
+    </dl>
+</div>
+<div>
+    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    <a class="btn btn-secondary" asp-action="Index">Regresar</a>
+</div>

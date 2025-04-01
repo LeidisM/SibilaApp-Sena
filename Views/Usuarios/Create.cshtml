@@ -1,0 +1,81 @@
+﻿@using SibilaApp.Models.ViewModels
+@model UsuarioViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="row">
+    <div class="col-12 ps-5 d-flex justify-content-center mb-3">
+        <h2 class="mt-0" id="texto">Crear Usuarios</h2>
+    </div>
+    <div class="col-12 ps-5">
+        <!-- Formulario de contacto -->
+        <form class="w-75 mx-auto" asp-action="Create" enctype="multipart/form-data">
+            <div class="row">
+                <!-- Primera columna -->
+                <div class="col-md-6">
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario.Nombre" class="form-label"></label>
+                        <input asp-for="Usuario.Nombre" class="form-control" id="nombre" required>
+                        <span asp-validation-for="Usuario.Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario.Apellido" class="form-label"></label>
+                        <input asp-for="Usuario.Apellido" class="form-control" id="apellido" required>
+                        <span asp-validation-for="Usuario.Apellido" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario.CorreoElectronico" class="form-label"></label>
+                        <input asp-for="Usuario.CorreoElectronico" class="form-control" id="correo" required>
+                        <span asp-validation-for="Usuario.CorreoElectronico" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Segunda columna -->
+                <div class="col-md-6">
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario.TipoDocumento" class="form-label"></label>
+                        <select asp-for="Usuario.TipoDocumento" asp-items="Model.EstadoUsuarioList" class="form-control">
+                            <option value="">Seleccione un tipo</option> <!-- Opción vacía -->
+                        </select>
+                        <span asp-validation-for="Usuario.TipoDocumento" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Usuario.Documento" class="form-label"></label>
+                        <input asp-for="Usuario.Documento" class="form-control" id="documento" required>
+                        <span asp-validation-for="Usuario.Documento" class="text-danger"></span>
+                    </div>
+                    @* <div class="mb-3">
+                        <label asp-for="Usuario.Contrasena" class="form-label"></label>
+                        <input asp-for="Usuario.Contrasena" class="form-control" id="contrasena" required>
+                        <span asp-validation-for="Usuario.Contrasena" class="text-danger"></span>
+                    </div> *@
+                    <div class="mb-3">
+                        <label asp-for="Usuario.RolId" class="form-label"></label>
+                        <select asp-for="Usuario.RolId" asp-items="@(new SelectList(Model.Roles, "Id", "Nombre"))" class="form-control">
+                            <option value="">Seleccione un rol</option> <!-- Opción vacía -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón de envío -->
+
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-success btn-s" type="submit">Crear</button>
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
+
+
