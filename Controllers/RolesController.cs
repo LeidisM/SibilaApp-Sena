@@ -19,12 +19,12 @@ namespace SibilaApp.Controllers
             _context = context;
         }
 
-        // GET: Roles
+        // Acción que muestra el formulario inicio vista nuevo rol 
         public async Task<IActionResult> Index()
         {
             return View(await _context.Roles.ToListAsync());
         }
-
+        // Acción GET que muestra el formulario de detalles del rol
         // GET: Roles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,7 +42,7 @@ namespace SibilaApp.Controllers
 
             return View(roles);
         }
-
+        // Acción GET que muestra el formulario para crear un nuevo rol
         // GET: Roles/Create
         public IActionResult Create()
         {
@@ -50,8 +50,7 @@ namespace SibilaApp.Controllers
         }
 
         // POST: Roles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] Roles roles)
@@ -82,8 +81,7 @@ namespace SibilaApp.Controllers
         }
 
         // POST: Roles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] Roles roles)

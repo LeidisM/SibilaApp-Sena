@@ -16,12 +16,12 @@ namespace SibilaApp.Controllers
         {
             _context = context;
         }
-
+        // Acción GET que devuelve la lista de usuarios.
         public async Task<IActionResult> Index()
         {
             return View(await _context.Usuarios.ToListAsync());
         }
-
+        // Acción GET que muestra el formulario para crear un nuevo usuario.
         [HttpGet]
         public IActionResult Create()
         {
@@ -39,7 +39,7 @@ namespace SibilaApp.Controllers
             };
             return View(usuarioVm);
         }
-
+        // Acción POST que guarda un nuevo usuario en la base de datos.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Models.Usuarios usuario)
@@ -48,6 +48,7 @@ namespace SibilaApp.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+        // Acción GET que muestra el formulario para editar un usuario existente.
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,6 +75,7 @@ namespace SibilaApp.Controllers
             }
             return View(usuarioVm);
         }
+        // Acción POST que actualiza la información de un usuario en la base de datos.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Usuarios usuario)
@@ -94,6 +96,8 @@ namespace SibilaApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        // Acción POST que elimina un usuario de la base de datos.
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -109,7 +113,7 @@ namespace SibilaApp.Controllers
             }
 
             return View(usuario);
-        }
+        }//confirmar eliminar
         // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -124,6 +128,7 @@ namespace SibilaApp.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        // Acción GET que muestra los detalles de un usuario específico.
         // GET: Details/Usuarios
         public async Task<IActionResult> Details(int? id)
         {

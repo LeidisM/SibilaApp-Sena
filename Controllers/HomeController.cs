@@ -23,7 +23,7 @@ namespace SibilaApp.Controllers
         {
             return View(); // Acción que devuelve la vista de la página de privacidad.
         }
-        // Acción para manejar errores con configuración de caché deshabilitada.
+        // Acción para manejar errores
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
