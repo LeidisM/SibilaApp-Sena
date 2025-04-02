@@ -11,15 +11,16 @@ namespace SibilaApp.Controllers
     public class LibrosController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public LibrosController(ApplicationDbContext context)
+        public LibrosController(ApplicationDbContext context) // Contexto de base de datos para acceder a la información de los libros.
         {
             _context = context;
         }
+        // Acción que devuelve la vista con la lista de libros.
         public async Task<IActionResult> Index()
         {
             return View(await _context.Libros.ToListAsync());
         }
-
+        // Acción GET para mostrar el formulario de creación de un nuevo libro.
         [HttpGet]
         public IActionResult Create()
         {
@@ -36,6 +37,7 @@ namespace SibilaApp.Controllers
             };
             return View(libroVm);
         }
+        // Acción POST para guardar un nuevo libro en la base de datos.
         [HttpPost]
         public async Task<IActionResult> Create(LibroViewModel libroVM)
         {
@@ -63,6 +65,7 @@ namespace SibilaApp.Controllers
             return RedirectToAction(nameof(Index));
          
         }
+        // Acción GET para mostrar el formulario de edición de un libro existente.
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,6 +91,7 @@ namespace SibilaApp.Controllers
             }
             return View(libroVm);
         }
+        // Acción POST para guardar los cambios realizados a un libro existente.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(LibroViewModel libroVm)
@@ -108,6 +112,7 @@ namespace SibilaApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        // Acción GET para confirmar la eliminación de un libro.
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,6 +129,7 @@ namespace SibilaApp.Controllers
 
             return View(libro);
         }
+        // Acción POST para eliminar un libro de la base de datos.
         // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -138,6 +144,7 @@ namespace SibilaApp.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        // Acción GET para mostrar los detalles de un libro.
         // GET: Details/Usuarios
         public async Task<IActionResult> Details(int? id)
         {

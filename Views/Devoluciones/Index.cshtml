@@ -15,7 +15,7 @@
                 <th>@Html.DisplayNameFor(model => model.Libro.Autor)</th>
                 <th>@Html.DisplayNameFor(model => model.FechaPrestamo)</th>
                 <th>@Html.DisplayNameFor(model => model.FechaDevolucion)</th>
-                <th></th>
+                
             </tr>
         </thead>
         <tbody class="table-group-divider" id="tablaPrestamos" width="100%" cellspacing="0">
@@ -28,7 +28,8 @@
                     <td>@Html.DisplayFor(modelItem => item.Libro.Titulo)</td>
                     <td>@Html.DisplayFor(modelItem => item.Libro.Autor)</td>
                     <td>@Html.DisplayFor(modelItem => item.FechaPrestamo)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FechaDevolucion)</td>                    
+                    <td>@Html.DisplayFor(modelItem => item.FechaDevolucion)</td>                   
+                    
                 </tr>
             }
         </tbody>

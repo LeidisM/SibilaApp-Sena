@@ -15,11 +15,13 @@ namespace SibilaApp.Controllers
         {
             _context = context;
         }
+        // Acción GET para obtener la lista de préstamos activos (sin devolución).
         public async Task<IActionResult> Index()
         {
             var prestamo = await _context.Prestamos.Include(p => p.Usuario).Include(p => p.Libro).Where(x => x.FechaDevolucion == null).ToListAsync();
             return View(prestamo);
         }
+        // Acción GET para mostrar el formulario de creación de un préstamo.
         [HttpGet]
         public IActionResult Create()
         {
@@ -30,10 +32,11 @@ namespace SibilaApp.Controllers
             };
             return View(prestamoVm);
         }
+        // Acción POST para registrar un nuevo préstamo en la base de datos.
         [HttpPost]
         public async Task<IActionResult> Create(PrestamoViewModel prestamoVm)
         {
-
+            // Validaciones básicas para asegurarse de que los campos requeridos no están vacíos.
             if (string.IsNullOrEmpty(prestamoVm.Documento))
             {
                 return View(prestamoVm);
@@ -42,17 +45,20 @@ namespace SibilaApp.Controllers
             {
                 return View(prestamoVm);
             }
+            // Busca al usuario en la base de datos según su documento.
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Documento == prestamoVm.Documento);
             if (usuario == null)
             {
                 return View(prestamoVm);
             }
+           
+            // Busca el libro en la base de datos según su ISBN.
             var libro = await _context.Libros.FirstOrDefaultAsync(l => l.ISBN == prestamoVm.ISBN);
             if (libro == null)
             {
                 return View(prestamoVm);
             }
-
+            // Crea un nuevo préstamo con la fecha actual.
             var prestamo = new Prestamos();
             prestamo.Usuario = usuario;
             prestamo.Libro = libro;
@@ -62,7 +68,7 @@ namespace SibilaApp.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        //E
+        // Acción GET para mostrar el formulario de edición de un préstamo existente.
         public async Task<IActionResult> Edit(int? id)
         {
 
@@ -85,6 +91,7 @@ namespace SibilaApp.Controllers
 
             return View(prestamoVm);
         }
+        // Acción POST para actualizar la información de un préstamo.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(PrestamoViewModel prestamoVm)
@@ -123,6 +130,7 @@ namespace SibilaApp.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        // Acción GET para mostrar los detalles de un préstamo.
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -139,9 +147,10 @@ namespace SibilaApp.Controllers
             
             return View(prestamo);
         }
-        [HttpPost]
 
-        // ✅ Método para marcar como devuelto automáticamente
+        // Acción GET para devolver un libro, asignando la fecha de devolución.
+        // Método para marcar como devuelto automáticamente
+        [HttpPost]
         [HttpGet]
         public async Task<IActionResult> Devolver(int id)
         {

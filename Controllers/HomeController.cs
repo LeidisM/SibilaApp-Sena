@@ -8,21 +8,22 @@ namespace SibilaApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        // Constructor del controlador que recibe un objeto ILogger para registrar logs.
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
-
+        // Acción que devuelve la vista de la página de inicio.
         public IActionResult Index()
         {
-            return View();
+            return View();// Retorna la vista asociada a la acción Index.
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            return View(); // Acción que devuelve la vista de la página de privacidad.
         }
-
+        // Acción para manejar errores con configuración de caché deshabilitada.
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

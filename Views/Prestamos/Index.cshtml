@@ -13,6 +13,9 @@
         <thead class="table-dark">
             <tr>                
                 <th>@Html.DisplayNameFor(model => model.Usuario)</th>
+                <th>@Html.DisplayNameFor(model => model.Usuario.Apellido)</th>
+                <th>@Html.DisplayNameFor(model => model.Usuario.Documento)</th>
+                <th>@Html.DisplayNameFor(model => model.Libro.Titulo)</th>
                 <th>@Html.DisplayNameFor(model => model.FechaPrestamo)</th>
                 <th>@Html.DisplayNameFor(model => model.FechaDevolucion)</th>                
                 <th></th>
@@ -23,9 +26,17 @@
             {
                 <tr>                    
                     <td>@Html.DisplayFor(modelItem => item.Usuario.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Usuario.Apellido)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Usuario.Documento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Libro.Titulo)</td>
                     <td>@Html.DisplayFor(modelItem => item.FechaPrestamo)</td>
                     <td>@Html.DisplayFor(modelItem => item.FechaDevolucion)</td>                    
-                    
+                    <td class="d-flex gap-2">
+
+                        <a class="btn btn-warning btn-sm" asp-action="Devolver" asp-route-id="@item.Id">Devolver</a>
+                        <a class="btn btn-success btn-sm" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        <a class="btn btn-success btn-sm" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                    </td>
                 </tr>
             }
         </tbody>
