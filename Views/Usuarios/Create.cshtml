@@ -34,11 +34,6 @@
                         <input asp-for="Usuario.CorreoElectronico" class="form-control" id="correo" required>
                         <span asp-validation-for="Usuario.CorreoElectronico" class="text-danger"></span>
                     </div>
-                </div>
-
-                <!-- Segunda columna -->
-                <div class="col-md-6">
-
                     <div class="mb-3">
                         <label asp-for="Usuario.TipoDocumento" class="form-label"></label>
                         <select asp-for="Usuario.TipoDocumento" asp-items="Model.EstadoUsuarioList" class="form-control">
@@ -46,17 +41,21 @@
                         </select>
                         <span asp-validation-for="Usuario.TipoDocumento" class="text-danger"></span>
                     </div>
+                </div>
+
+                <!-- Segunda columna -->
+                <div class="col-md-6">                   
 
                     <div class="mb-3">
                         <label asp-for="Usuario.Documento" class="form-label"></label>
                         <input asp-for="Usuario.Documento" class="form-control" id="documento" required>
                         <span asp-validation-for="Usuario.Documento" class="text-danger"></span>
                     </div>
-                    @* <div class="mb-3">
+                     <div class="mb-3">
                         <label asp-for="Usuario.Contrasena" class="form-label"></label>
-                        <input asp-for="Usuario.Contrasena" class="form-control" id="contrasena" required>
+                        <input asp-for="Usuario.Contrasena" class="form-control" id="contrasena">
                         <span asp-validation-for="Usuario.Contrasena" class="text-danger"></span>
-                    </div> *@
+                    </div>
                     <div class="mb-3">
                         <label asp-for="Usuario.RolId" class="form-label"></label>
                         <select asp-for="Usuario.RolId" asp-items="@(new SelectList(Model.Roles, "Id", "Nombre"))" class="form-control">
@@ -75,7 +74,12 @@
         </form>
     </div>
 
-
 </div>
+<script>
+    var mensaje = '@TempData["Mensaje"]';
+    if (mensaje) {
+        alert(mensaje);
+    }
+</script>
 
 

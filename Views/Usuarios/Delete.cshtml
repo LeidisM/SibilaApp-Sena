@@ -22,3 +22,9 @@
         <a asp-action="Index" class="btn btn-secondary">Regresar</a>
     </form>
 </div>
+<script>
+    var mensaje = '@TempData["Mensaje"]';
+    if (mensaje) {
+        alert(mensaje);
+    }
+</script>

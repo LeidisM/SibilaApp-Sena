@@ -70,8 +70,21 @@
             });
         });
     </script>
+
+    <script>
+        // Mensaje de éxito        
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text> 
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: '@TempData["SuccessMessage"]'               
+                    
+            });
+            </text>
+        }       
+    </script>
 }
-
-
 
 

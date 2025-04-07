@@ -5,9 +5,11 @@ using SibilaApp.Data;
 using SibilaApp.Models.Enums;
 using SibilaApp.Models.ViewModels;
 using SibilaApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SibilaApp.Controllers
 {
+    [Authorize]
     public class DevolucionesController: Controller
     {
         private readonly ApplicationDbContext _context;

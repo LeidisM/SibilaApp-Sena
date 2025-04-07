@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SibilaApp.Data;
@@ -8,6 +9,7 @@ using SibilaApp.Models.ViewModels;
 
 namespace SibilaApp.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -46,8 +48,10 @@ namespace SibilaApp.Controllers
         {
             _context.Usuarios.Add(usuario);
             _context.SaveChanges();
+            TempData["SuccessMessage"] = "Usuario creado exitosamente";
             return RedirectToAction(nameof(Index));
         }
+
         // Acción GET que muestra el formulario para editar un usuario existente.
         public async Task<IActionResult> Edit(int? id)
         {
@@ -87,13 +91,17 @@ namespace SibilaApp.Controllers
                 {
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Usuario actualizado correctamente";
                 }
                 catch (DbUpdateConcurrencyException)
-                {                                      
-                    throw;                    
+                {
+                    TempData["ErrorMessage"] = "Ocurrió un error al actualizar el usuario.";
+                    //throw;
+
                 }
                 return RedirectToAction(nameof(Index));
             }
+            TempData["ErrorMessage"] = "Datos inválidos. No se pudo guardar.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -123,9 +131,14 @@ namespace SibilaApp.Controllers
             if (usuario != null)
             {
                 _context.Usuarios.Remove(usuario);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Usuario eliminado exitosamente.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Usuario no encontrado.";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
         // Acción GET que muestra los detalles de un usuario específico.

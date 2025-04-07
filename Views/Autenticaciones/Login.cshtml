@@ -1,0 +1,51 @@
+﻿@using SibilaApp.Models.ViewModels
+@model LoginViewModel
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+        <h3 class="text-center mb-4">Iniciar Sesión</h3>
+
+        <form asp-action="Login" method="post">
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label">Correo electrónico</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Password" class="form-label">Contraseña</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-lock"></i>
+                    </span>
+                    <input asp-for="Password" type="password" class="form-control" />
+                </div>
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Ingresar</button>
+
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    ¿Olvidaste tu contraseña? Comunícate con el administrador del sistema.
+                </small>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        // Mostrar alerta si hay un mensaje de error del servidor
+        var error = '@ViewData["LoginError"]';
+        if (error) {
+            alert(error);
+        }
+    </script>
+}
+
+

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SibilaApp.Data;
@@ -8,6 +9,7 @@ using SibilaApp.Models.ViewModels;
 
 namespace SibilaApp.Controllers
 {
+    [Authorize]
     public class LibrosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -58,10 +60,12 @@ namespace SibilaApp.Controllers
                         Console.WriteLine($"Error en {key}: {error.ErrorMessage}");
                     }
                 }
+                TempData["ErrorMessage"] = "No se pudo registrar el libro. Verifica los datos ingresados.";
                 return View(libroVM); // Devuelve la vista si hay errores
             }
             _context.Libros.Add(libroVM.Libro);
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Libro registrado exitosamente.";
             return RedirectToAction(nameof(Index));
          
         }
@@ -101,11 +105,13 @@ namespace SibilaApp.Controllers
             {
                 try
                 {
+                    TempData["SuccessMessage"] = "Libro actualizado correctamente.";
                     _context.Update(libroVm.Libro);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    TempData["ErrorMessage"] = "Error al editar el libro. Verifica los datos ingresados.";
                     throw;
                 }
                 return RedirectToAction(nameof(Index));
@@ -139,9 +145,12 @@ namespace SibilaApp.Controllers
             if (libro != null)
             {
                 _context.Libros.Remove(libro);
+                TempData["SuccessMessage"] = "Libro eliminado correctamente.";
+
             }
 
             await _context.SaveChangesAsync();
+            TempData["ErrorMessage"] = "Libro no encontrado.";
             return RedirectToAction(nameof(Index));
         }
         // Acción GET para mostrar los detalles de un libro.
@@ -157,7 +166,9 @@ namespace SibilaApp.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (libro == null)
             {
+
                 return NotFound();
+
             }
 
             return View(libro);

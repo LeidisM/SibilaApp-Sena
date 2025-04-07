@@ -5,9 +5,11 @@ using SibilaApp.Data;
 using SibilaApp.Models.Enums;
 using SibilaApp.Models.ViewModels;
 using SibilaApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SibilaApp.Controllers
 {
+    [Authorize]
     public class PrestamosController: Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,13 +51,15 @@ namespace SibilaApp.Controllers
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Documento == prestamoVm.Documento);
             if (usuario == null)
             {
+                TempData["SuccessMessage"] = "Usuario no encontrado.";
                 return View(prestamoVm);
             }
            
             // Busca el libro en la base de datos según su ISBN.
             var libro = await _context.Libros.FirstOrDefaultAsync(l => l.ISBN == prestamoVm.ISBN);
             if (libro == null)
-            {
+            {                
+                TempData["ErrorMessage"] = "Libro no encontrado.";
                 return View(prestamoVm);
             }
             // Crea un nuevo préstamo con la fecha actual.
@@ -66,6 +70,7 @@ namespace SibilaApp.Controllers
 
             _context.Prestamos.Add(prestamo);
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Préstamo registrado correctamente.";
             return RedirectToAction(nameof(Index));
         }
         // Acción GET para mostrar el formulario de edición de un préstamo existente.
@@ -107,6 +112,7 @@ namespace SibilaApp.Controllers
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Documento == prestamoVm.Documento);
             if (usuario == null)
             {
+                TempData["ErrorMessage"] = "Usuario o libro no encontrado.";
                 return View(prestamoVm);
             }
             var libro = await _context.Libros.FirstOrDefaultAsync(l => l.ISBN == prestamoVm.ISBN);
@@ -123,6 +129,7 @@ namespace SibilaApp.Controllers
             {
                 _context.Update(prestamoVm.Prestamo);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Préstamo actualizado correctamente.";
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -167,9 +174,11 @@ namespace SibilaApp.Controllers
             {
                 _context.Update(prestamo);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Libro devuelto correctamente.";
             }
             catch (DbUpdateConcurrencyException)
             {
+                TempData["ErrorMessage"] = "Error al devolver el libro.";
                 throw;
             }
 
