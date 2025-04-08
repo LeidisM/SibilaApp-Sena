@@ -28,14 +28,15 @@ namespace SibilaApp.Controllers
                 return View(model);
 
             var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(u => u.CorreoElectronico == model.Email && (u.RolId == 1 || u.RolId == 2));
+                .FirstOrDefaultAsync(u => u.CorreoElectronico == model.Email && (u.RolId == 2 || u.RolId == 3));
 
+            
             if (usuario == null || model.Password != usuario.Contrasena)
             {
-                ViewData["LoginError"] = "Usuario o credenciales incorrectos verificar.";
+                TempData["ErrorMessage"] = "Usuario o credenciales incorrectos verificar.";
                 return View(model);
             }
-
+           
             // Crear claims para la autenticación
             var claims = new List<Claim>
             {
@@ -50,14 +51,13 @@ namespace SibilaApp.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties
-            );
-
+            );            
             return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Auth");
+            return RedirectToAction("Login", "Autenticaciones");
         }
 
     }

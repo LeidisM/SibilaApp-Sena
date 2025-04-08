@@ -2,8 +2,8 @@
 {
     public enum TipoDocumentoUsuarioEnum
     {
-        Cc = 1,
-        Ti = 2,
-        CedulaExtrangeria = 3
+        CC = 1,
+        TI = 2,
+        CedulaExtranjeria = 3
     }
 }

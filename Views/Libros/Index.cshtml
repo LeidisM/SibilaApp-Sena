@@ -44,49 +44,55 @@
 </div>
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            //Llamar a datatable
-            $('#tablaLibros').DataTable({
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
+        <script>
+            $(document).ready(function () {
+                    $('#tablaLibros').DataTable({
+                    language: {
+                        decimal: "",
+                        emptyTable: "No hay información",
+                        info: "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                        infoEmpty: "Mostrando 0 to 0 of 0 Entradas",
+                        infoFiltered: "(Filtrado de _MAX_ total entradas)",
+                        lengthMenu: "Mostrar _MENU_ Entradas",
+                        loadingRecords: "Cargando...",
+                        processing: "Procesando...",
+                        search: "Buscar:",
+                        zeroRecords: "Sin resultados encontrados",
+                        paginate: {
+                            first: "Primero",
+                            last: "Último",
+                            next: "Siguiente",
+                            previous: "Anterior"
+                        }
                     }
-                }
-            });
-        });
-    </script>
-<script>
-    // Mensaje de éxito
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <text>
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: '@TempData["SuccessMessage"]'
+                });
 
+
+                // SweetAlert2 mensajes
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Éxito',
+                                text: '@TempData["SuccessMessage"]'
+                            });
+            </text>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <text>
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: '@TempData["ErrorMessage"]'
+                            });
+            </text>
+        }
             });
-        </text>
-    }
-</script>
+        </script>
 }
-
 
 
 

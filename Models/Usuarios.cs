@@ -1,5 +1,6 @@
 ﻿using SibilaApp.Models.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace SibilaApp.Models
 {
@@ -10,7 +11,7 @@ namespace SibilaApp.Models
         public string Apellido { get; set; }
         public TipoDocumentoUsuarioEnum TipoDocumento { get; set; }
         public string Documento { get; set; }
-        public string CorreoElectronico { get; set; }
+       public string CorreoElectronico { get; set; }
         public string? Contrasena { get; set; }
         public int RolId { get; set; }
         [ForeignKey(nameof(RolId))]

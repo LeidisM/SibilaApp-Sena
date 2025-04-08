@@ -51,7 +51,7 @@ namespace SibilaApp.Controllers
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Documento == prestamoVm.Documento);
             if (usuario == null)
             {
-                TempData["SuccessMessage"] = "Usuario no encontrado.";
+                TempData["ErrorMessage"] = "Usuario no encontrado.";
                 return View(prestamoVm);
             }
            
